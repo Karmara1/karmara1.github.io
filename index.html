@@ -2,7 +2,7 @@
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
 <style>
-  .arjs-loader {
+    .arjs-loader {
     height: 100%;
     width: 100%;
     position: absolute;
@@ -13,42 +13,42 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    }
 
-  .arjs-loader div {
+    .arjs-loader div {
     text-align: center;
     font-size: 1.25em;
     color: white;
-  }
+    }
 </style>
 
 <body style="margin : 0px; overflow: hidden;">
-  <!-- minimal loader shown until image descriptors are loaded -->
-  <div class="arjs-loader">
-    <div>Loading, please wait...</div>
-  </div>
-  <a-scene
-    vr-mode-ui="enabled: false;"
-    renderer="logarithmicDepthBuffer: true;"
-    embedded
-    arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
-  >
-    <!-- we use cors proxy to avoid cross-origin problems -->
-    <a-nft
-      type="nft"
-      url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
-      smooth="true"
-      smoothCount="10"
-      smoothTolerance=".01"
-      smoothThreshold="5"
-    >
-      <a-entity
-        gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-        scale="5 5 5"
-        position="50 150 0"
-      >
-      </a-entity>
-    </a-nft>
-    <a-entity camera></a-entity>
-  </a-scene>
+    <!-- minimal loader shown until image descriptors are loaded -->
+    <div class="arjs-loader">
+        <div>Gira tu celular horizontalmente<br> Cargando...</div>
+    </div>
+    <a-scene
+        vr-mode-ui="enabled: false;"
+        renderer="logarithmicDepthBuffer: true;"
+        embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+        >
+        <!-- we use cors proxy to avoid cross-origin problems -->
+        <a-nft
+            type="nft"
+            url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
+            smooth="true"
+            smoothCount="10"
+            smoothTolerance=".01"
+            smoothThreshold="5"
+        >
+        <a-entity
+            gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+            scale="5 5 5"
+            position="50 150 0"
+        >
+        </a-entity>
+        </a-nft>
+        <a-entity camera></a-entity>
+    </a-scene>
 </body>
