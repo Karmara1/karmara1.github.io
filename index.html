@@ -1,89 +1,102 @@
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<!-- Augmented Reality on the Web in 10 lines of html! https://github.com/jeromeetienne/ar.js --> 
+<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+<!-- aframe-keyboard-controls.js Permite todas las accion utilizando el Teclado --> 
+<script src="https://cdn.rawgit.com/jeromeetienne/AR.js/dev/aframe/build/aframe-ar.js"></script>
+<script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 
-<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js'></script>
-<script>
-    window.onload = function() {
-        AFRAME.registerComponent('videohandler', {
-            init: function () {
-                var marker = this.el;
-
-                this.vid = document.querySelector("#vid");
-
-                marker.addEventListener('markerFound', function () {
-                    this.vid.play();
-                }.bind(this));
-    
-		marker.addEventListener('markerLost', function() {
-			this.vid.pause();
-			this.vid.currentTime = 0;
-		}.bind(this));
-            }
-        });
-    };
-</script>
-
+<meta name="apple-mobile-web-app-capable" content="yes">
 <style>
-    .arjs-loader {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+
+    @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+    
+    button {
+    border: none;
+    padding: 1rem 2rem;
+    margin: 0;
+    text-decoration: none;
+    background: #0069ed;
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-family: 'Montserrat';
     }
 
-    .arjs-loader div {
-        text-align: center;
-        font-size: 1.25em;
-        color: white;
+    button:hover,
+    button:focus {
+        background: #0053ba;
     }
+
+    button:focus {
+        outline: 1px solid #fff;
+        outline-offset: -4px;
+    }
+
+    button:active {
+        transform: scale(0.99);
+    }
+
+    h1 {    
+    color: rgb(0, 0, 0);
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    font-weight: bold;
+}
+
+h2 {    
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-family: 'Montserrat';
+    font-size: medium;
+    
+}
+
 </style>
 
 <body style='margin : 0px; overflow: hidden;'>
-    <div class="arjs-loader">
-        <div>Gira tu celular ...</div>
+
+    <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">   
+
+        <a-marker type="pattern" url="https://cdn.glitch.com/e6296a18-1f6f-42c6-a5b4-e95bdc768c0c%2Fpattern-AviancAR-06%20(1).patt?v=1606287727010">
+            <video id="mivideo" crossOrigin="anonymous" playsinline webkitplaysinline autoplay controls muted src="1.mp4"></video>
+            <a-video src="#mivideo" position="0 0 0" rotation="270 0 0" ></a-video>
+    
+            <script> 
+                var m = document.querySelector("a-marker")
+                m.addEventListener("markerFound", (e)=>{
+                console.log("found")
+                var v = document.querySelector('#mivideo').play();
+            })
+                m.addEventListener("markerLost", (e)=>{
+                console.log("lost")
+                var v = document.querySelector('#mivideo').pause();
+            
+            })
+
+            document.querySelector("button").addEventListener("click", (e)=>{
+                console.log("Activar Sonido")
+            var v = document.querySelector('#mivideo').muted=false;
+            })
+            </script>
+
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <div style='position: fixed; top: 23px; right: 10px; width:100%; text-align: center; z-index: 1;'>
+        <h1>EL ALUMBRAMIENTO DE MEMORIAS</h1>
+        <button>
+            Activar Sonido
+        </button>
     </div>
-    <a-scene
-        vr-mode-ui="enabled: false;"
-        renderer='antialias: true; alpha: true; precision: mediump;'
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
 
-        <a-assets>
-            <video 
-                src="https://cors-anywhere.herokuapp.com/https://www.w3schools.com/html/mov_bbb.mp4"
-                preload="auto" 
-                id="vid" 
-                response-type="arraybuffer" 
-                loop
-                crossorigin 
-                webkit-playsinline 
-                autoplay 
-                muted="false"
-                playsinline>
-            </video>
-        </a-assets>
-
-        <a-nft
-            videohandler
-            type='nft' 
-            url='nft/Aviancaa'
-            smooth="true" 
-            smoothcount="10" 
-            smoothtolerance="0.01" 
-            smooththreshold="5"
-        >
-            <a-video
-                src="#vid"
-                position='50 150 -100'
-                width='300'
-                height='175'
-                >
-            </a-video>
-        </a-nft>
-		<a-entity camera></a-entity>
-	</a-scene>
+    <div style='position: fixed; right: 20px; bottom: 23px;'>
+        <h2>Este mural fue creado bajo...</h2>
+    </div>
 </body>
